@@ -20,7 +20,7 @@ public class CupomController {
 	public JSONArray index() {
 		JSONArray cupons = new JSONArray();
 		try {
-			CupomRepositorio repositorio = new CupomRepositorio();
+			CupomRepositorio repositorio = CupomRepositorio.getInstancia();
 			for (Cupom cupom : repositorio.listar()) cupons.add(cupom.toJson());
 		}
 		catch (Exception e) {
@@ -35,7 +35,7 @@ public class CupomController {
 			@RequestParam(value = "valor") float valor
 	) {
 		try {
-			CupomRepositorio repositorio = new CupomRepositorio();
+			CupomRepositorio repositorio = CupomRepositorio.getInstancia();
 			
 			// Verificar se já existe cupom
 			Cupom cupom = repositorio.buscarPeloCodigo(codigo);
@@ -63,7 +63,7 @@ public class CupomController {
 			@PathVariable int id
 	) {
 		try {
-			CupomRepositorio repositorio = new CupomRepositorio();
+			CupomRepositorio repositorio = CupomRepositorio.getInstancia();
 			
 			// Verificar se cupom existe
 			Cupom cupom = repositorio.buscar(id);

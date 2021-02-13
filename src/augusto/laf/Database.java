@@ -29,6 +29,8 @@ public class Database {
 		return Database.INSTANCIA;
 	}
 	
+	// Singleton
+	
 	private LinkedList<MigrationAbstract> migrations;
 	private Connection conexao;
 	

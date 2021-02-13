@@ -12,6 +12,14 @@ public class Produto extends ModelAbstract {
 	private float preco;
 	private int estoque;
 	
+	public Produto() {
+		super(null);
+	}
+	
+	public Produto(String nome, float preco, int estoque) {
+		this(null, nome, preco, estoque);
+	}
+	
 	public Produto(Integer id, String nome, float preco, int estoque) {
 		super(id);
 		this.nome = nome;

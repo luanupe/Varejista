@@ -2,14 +2,29 @@ package augusto.laf.repositorios;
 
 import java.util.List;
 import java.util.LinkedList;
+
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
-import augusto.laf.Database;
+
 import augusto.laf.models.Cupom;
+import augusto.laf.Database;
 import augusto.laf.contratos.RepositorioAbstract;
 
 public class CupomRepositorio extends RepositorioAbstract<Cupom> {
+	
+	private static CupomRepositorio INSTANCIA;
+	
+	public synchronized static CupomRepositorio getInstancia() {
+		if ((CupomRepositorio.INSTANCIA == null)) {
+			CupomRepositorio.INSTANCIA = new CupomRepositorio();
+		}
+		return CupomRepositorio.INSTANCIA;
+	}
+	
+	private CupomRepositorio() {
+		// Singleton
+	}
 	
 	private Cupom buscar(ResultSet result) throws SQLException {
 		// Buscar na cache ou instanciar
@@ -41,8 +56,8 @@ public class CupomRepositorio extends RepositorioAbstract<Cupom> {
 	public Cupom buscarPeloCodigo(String codigo) {
 		try {
 			Database db = Database.getInstancia();
-			PreparedStatement stmt = db.getConexao().prepareStatement("SELECT * FROM cupom WHERE ( codigo LIKE ? )");
-			stmt.setString(1, "%" + codigo + "%");
+			PreparedStatement stmt = db.getConexao().prepareStatement("SELECT * FROM cupom WHERE ( codigo = ? )");
+			stmt.setString(1, codigo);
 			
 			ResultSet result = stmt.executeQuery();
 			if ((result.next())) return this.buscar(result);
