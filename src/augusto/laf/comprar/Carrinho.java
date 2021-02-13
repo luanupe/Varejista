@@ -95,7 +95,7 @@ public class Carrinho {
 		if ((this.cupom != null)) total -= this.cupom.getValor();
 		
 		// Valor calculado
-		return total;
+		return ((total > 0) ? total : 0);
 	}
 	
 	/*

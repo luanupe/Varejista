@@ -12,6 +12,14 @@
 
 - Não utilizei nenhum framework (JDBC/Hibernate) para gerenciamento da base de dados uma vez que as consultas são poucas e bastante simples;
 
+- Não realizei seed no banco de dados, quando a aplicação for executada, a base de dados estará vazia, no arquivo Database existe um método que descomentando a chamada do mesmo (linha 30) alguns dados padrões serão inseridos automaticamente;
+
+- Não é interessante ter uma rota que irá listar todos os cupoms (e também os produtos sem filtros) no entanto, mantive a rota para testes;
+
+- Mesmo não sendo indicado utilizar os tipos nativos float e double para aplicações monetárias devido ao nível de precisão, para este exercício utilizei float tanto pela praticidade (ao invés das classes específicas) e pelo suporte do SQLite;
+
+- Uma vez que não há necessidade de validar o preço do carrinho e o preço do cupom (nem mesmo um valor mínimo para o cupom) é possível o carrinho ser zerado e a compra sair de graça; 
+
 - Tentei demonstrar também meu domínio em orientação a objetos durante a construção deste projeto.
 
 ## Grato
