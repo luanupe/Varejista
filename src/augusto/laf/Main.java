@@ -7,6 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Main {
 	
 	public static void main(String[] args) {
+		// Iniciar SQLite
+		Database.getInstancia();
+		
+		// Iniciar aplicação
 		SpringApplication.run(Main.class, args);
 	}
 	
