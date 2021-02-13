@@ -1,7 +1,9 @@
 package augusto.laf.repositorios;
 
-import java.sql.ResultSet;
+import java.util.List;
+import java.util.LinkedList;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import augusto.laf.Database;
 import augusto.laf.models.Cupom;
@@ -18,6 +20,22 @@ public class CupomRepositorio extends RepositorioAbstract<Cupom> {
 		cupom.atualizar(result);
 		super.cacheAdicionar(cupom.getId(), cupom);
 		return cupom;
+	}
+	
+	@Override
+	public List<Cupom> listar() {
+		List<Cupom> cupons = new LinkedList<Cupom>();
+		try {
+			Database db = Database.getInstancia();
+			PreparedStatement stmt = db.getConexao().prepareStatement("SELECT * FROM cupom ORDER BY id ASC");
+			
+			ResultSet result = stmt.executeQuery();
+			while (result.next()) cupons.add(this.buscar(result)); 
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cupons;
 	}
 	
 	public Cupom buscarPeloCodigo(String codigo) {
@@ -62,16 +80,18 @@ public class CupomRepositorio extends RepositorioAbstract<Cupom> {
 				stmt.setFloat(2, model.getValor());
 				
 				// Inserir Registro
-				stmt.executeUpdate();
-				
-				// Buscar inserted keys
-				ResultSet result = stmt.getGeneratedKeys();
-				if ((result.next()))
+				boolean status = (stmt.executeUpdate() > 0);
+				if ((status))
 				{
-					model.setId(result.getInt(1));
-					super.cacheAdicionar(model.getId(), model);
-					return true;
+					// Buscar inserted keys
+					ResultSet result = stmt.getGeneratedKeys();
+					if ((result.next()))
+					{
+						model.setId(result.getInt(1));
+						super.cacheAdicionar(model.getId(), model);
+					}
 				}
+				return status;
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -92,7 +112,7 @@ public class CupomRepositorio extends RepositorioAbstract<Cupom> {
 				stmt.setInt(3, model.getId());
 				
 				// Atualizar Registro
-				boolean status = stmt.execute();
+				boolean status = (stmt.executeUpdate() > 0);
 				if ((status)) super.cacheAdicionar(model.getId(), model);
 				return status;
 			}

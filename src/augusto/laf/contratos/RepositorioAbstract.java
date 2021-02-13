@@ -1,9 +1,7 @@
 package augusto.laf.contratos;
 
+import java.util.List;
 import java.util.Map;
-
-import augusto.laf.models.Cupom;
-
 import java.util.HashMap;
 
 public abstract class RepositorioAbstract<M> {
@@ -27,6 +25,8 @@ public abstract class RepositorioAbstract<M> {
 			this.cache.remove(id);
 		}
 	}
+	
+	public abstract List<M> listar();
 	
 	public abstract M buscar(int id);
 	
