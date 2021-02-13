@@ -1,11 +1,10 @@
 package augusto.laf.contratos;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import net.sf.json.JSONObject;
 
-/*
- * Para esse projeto será utilizado com repositório em memória
- * portando, todos os models devem extender essa superclasse
- */
 public abstract class ModelAbstract {
 	
 	/*
@@ -29,7 +28,7 @@ public abstract class ModelAbstract {
 	}
 	
 	public final void setId(Integer id) {
-		if ((this.id == null)) this.id = null;
+		if ((this.id == null)) this.id = id;
 	}
 	
 	/*
@@ -39,6 +38,8 @@ public abstract class ModelAbstract {
 	public final boolean isPersistido() {
 		return (this.id != null);
 	}
+	
+	public abstract void atualizar(ResultSet result) throws SQLException;
 	
 	public abstract JSONObject toJson();
 

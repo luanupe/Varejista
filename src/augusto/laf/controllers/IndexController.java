@@ -10,7 +10,7 @@ import net.sf.json.JSONObject;
 public class IndexController {
 
 	@GetMapping("/")
-	public JSONObject greeting(
+	public JSONObject index(
 			@RequestParam(value = "nome", defaultValue = "Hello") String nome,
 			@RequestParam(value = "sobrenome", defaultValue = "World") String sobrenome
 	) {
