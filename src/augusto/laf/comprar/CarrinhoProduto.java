@@ -3,6 +3,7 @@ package augusto.laf.comprar;
 import augusto.laf.exceptions.CarrinhoException;
 import augusto.laf.models.Produto;
 import augusto.laf.repositorios.ProdutoRepositorio;
+import net.sf.json.JSONObject;
 
 public class CarrinhoProduto {
 	
@@ -29,7 +30,7 @@ public class CarrinhoProduto {
 	
 	protected void removerQuantidade(int quantidade) throws CarrinhoException {
 		if ((quantidade > this.quantidade)) throw new CarrinhoException("Não é possível toda essa quantidade de produtos.");
-		quantidade = (this.quantidade = quantidade);
+		quantidade = (this.quantidade - quantidade);
 		this.setQuantidade(quantidade);
 	}
 	
@@ -72,8 +73,17 @@ public class CarrinhoProduto {
 	 */
 	public float getTotalDesconto() {
 		float total = this.getTotal();
-		if ((this.quantidade > 0)) total = (total * 0.90f);
+		if ((this.quantidade >= 10)) total = (total * 0.90f);
 		return total;
+	}
+	
+	public JSONObject toJson() {
+		JSONObject detalhes = new JSONObject();
+		detalhes.put("produto", this.getProduto().toJson());
+		detalhes.put("quantidade", this.quantidade);
+		detalhes.put("valor", this.getTotal());
+		detalhes.put("valor_desconto", this.getTotalDesconto());
+		return detalhes;
 	}
 
 }

@@ -4,6 +4,8 @@
 
 - Utilizei SpringBoot para mapeamento de rotas e serviço HTTP;
 
+- Optei por deixar todos os métodos GET, nenhum POST, para testar mais facilmente pelo navegador;
+
 - Inicialmente iria fazer a persistência completamente em memória, no entanto, optei por SQLite. Deixei o caminho para a base fixo no código mesmo, não criei arquivo de configuração para mudar o local de armazenamento do banco de dados;
 
 - Optei por deixar o carrinho de compras em memória (sem persistência na base) uma vez que observei que em grandes varejistas o carrinho de compras não é compartilhado entre dispotivos, é vinculado ao seu browser/cookies;
