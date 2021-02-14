@@ -118,7 +118,7 @@ public class Carrinho {
 		float totalReal = this.getTotal();
 		float totalDesconto = this.getTotalDesconto();
 
-		// Aplicar descontos a parti
+		// Aplicar descontos a partir de 10K
 		if ((totalReal >= 10000f)) totalDesconto *= 0.9;
 		else if ((totalReal >= 5000f)) totalDesconto *= 0.93;
 		else if ((totalReal >= 1000f)) totalDesconto *= 0.95;
